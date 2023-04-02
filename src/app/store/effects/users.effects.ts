@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as actionsUsers from '../actions';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
+import { of } from 'rxjs';
+import { ErrorRes } from 'src/app/interfaces/user.interface';
 
 @Injectable()
 export class usersEffects {
@@ -11,11 +13,21 @@ export class usersEffects {
   loadUsers$ = createEffect(() =>
     this._actions$.pipe(
       ofType(actionsUsers.loadUsers),
-      tap((data) => console.log('effect tap: ', data)),
       mergeMap(() =>
         this._usersService.getUsers().pipe(
-          tap((data) => console.log('getUsers effects', data)),
-          map((users) => actionsUsers.loadUsersSuccess({ users: users }))
+          map((users) => actionsUsers.loadUsersSuccess({ users: users })),
+          catchError((err: ErrorRes) =>
+            of(
+              actionsUsers.loadUsersError({
+                paylod: {
+                  status: err.status,
+                  url: err.url,
+                  name: err.message,
+                  message: err.message,
+                },
+              })
+            )
+          )
         )
       )
     )
