@@ -3,14 +3,14 @@ import { User } from 'src/app/models/user.model';
 import * as actions from '../actions';
 
 export interface UsersState {
-  users: Array<User>;
+  users: Array<User> | null;
   loading: boolean;
   loaded: boolean;
   error: any | null;
 }
 
 export const usersInitialState: UsersState = {
-  users: [] as Array<User>,
+  users: null,
   loading: false,
   loaded: false,
   error: null,
