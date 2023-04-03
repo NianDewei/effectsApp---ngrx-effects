@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../services/user.service';
+import { RouterModule } from '@angular/router';
+
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user.model';
+
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducers';
-import * as actionsUsers from 'src/app/store/actions';
 import { UsersState } from 'src/app/store/reducers';
+import * as actionsUsers from 'src/app/store/actions';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })

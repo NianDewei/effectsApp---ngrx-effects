@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { ListComponent } from './users/list/list.component';
+import { ListComponent } from './pages/users/list/list.component';
 // !ngrx
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './store/app.reducers';
@@ -23,8 +23,8 @@ import { effectsArray } from './store/effects';
     ListComponent,
     SharedModule,
     StoreModule.forRoot(appReducers),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot(effectsArray),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],

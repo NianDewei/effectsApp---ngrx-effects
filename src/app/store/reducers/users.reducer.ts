@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/models/user.model';
 import * as actions from '../actions';
-import { ErrorRes } from 'src/app/interfaces/user.interface';
+import { ErrorRes } from 'src/app/interfaces/users.interface';
 
 export interface UsersState {
   users: Array<User> | null;

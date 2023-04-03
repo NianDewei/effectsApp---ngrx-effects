@@ -25,7 +25,11 @@
             </p>
           </div>
           <div class="card-footer">
-            <small class="text-muted">ID: {{ user.id }}</small>
+            <small class="text-muted"
+              ><a routerLink="/user/{{ user.id }}" routerLinkActive="active"
+                >ID: {{ user.id }}</a
+              ></small
+            >
           </div>
         </div>
       </div>

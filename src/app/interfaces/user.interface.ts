@@ -1,13 +1,9 @@
 export interface UserRes {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
-  data: Datum[];
+  data: Data;
   support: Support;
 }
 
-export interface Datum {
+export interface Data {
   id: number;
   email: string;
   first_name: string;
@@ -18,11 +14,4 @@ export interface Datum {
 export interface Support {
   url: string;
   text: string;
-}
-
-export interface ErrorRes {
-  status: number;
-  url: string;
-  name: string;
-  message: string;
 }
