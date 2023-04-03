@@ -1,23 +1,52 @@
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col" *ngFor="let user of (users$ | async)?.users">
-    <div class="card h-100">
-      <img
-        [src]="user.avatar"
-        class="card-img-top"
-        title="{{ user.first_name }}"
-        [alt]="user.first_name"
-      />
-      <div class="card-body">
-        <h5 class="card-title">
-          {{ user.first_name + " " + user.last_name }}
-        </h5>
-        <p class="card-text">
-          This is a wider card with supporting text below as a natural.
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">ID: {{ user.id }}</small>
+<ng-container *ngIf="(users$ | async)?.loading; else user">
+  <div class="container d-flex align-items-center">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div>
+</ng-container>
+
+<ng-template #user>
+  <ng-container *ngIf="(users$ | async)?.loaded; else error">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" *ngFor="let user of (users$ | async)?.users">
+        <div class="card h-100">
+          <img
+            [src]="user.avatar"
+            class="card-img-top"
+            title="{{ user.first_name }}"
+            [alt]="user.first_name"
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ user.first_name + " " + user.last_name }}
+            </h5>
+            <p class="card-text">
+              This is a wider card with supporting text below as a natural.
+            </p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">ID: {{ user.id }}</small>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </ng-container>
+
+  <ng-template #error>
+    <div class="alert alert-danger" role="alert">
+      <h4>Something went wrong!</h4>
+      <span
+        >Type: <span> {{ (users$ | async)?.error?.name }}</span></span
+      >
+      <br />
+      <span
+        >Message: <span> {{ (users$ | async)?.error?.message }}</span></span
+      ><br />
+      <span
+        >Status: <span> {{ (users$ | async)?.error?.status }}</span></span
+      >
+      <hr />
+      <p class="mb-0 fs-8">source: {{ (users$ | async)?.error?.url }}</p>
+    </div>
+  </ng-template>
+</ng-template>

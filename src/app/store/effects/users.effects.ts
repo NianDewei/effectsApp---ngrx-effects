@@ -22,7 +22,7 @@ export class usersEffects {
                 paylod: {
                   status: err.status,
                   url: err.url,
-                  name: err.message,
+                  name: err.name,
                   message: err.message,
                 },
               })

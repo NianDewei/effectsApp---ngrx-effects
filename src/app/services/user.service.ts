@@ -16,7 +16,7 @@ export class UserService {
   // !methods
   getUsers(): Observable<Array<User>> {
     return this._http
-      .get<UserRes>(`${this._path}/users?per_page=6`)
+      .get<UserRes>(`${this._path}/users?per_page=6&delay=5`)
       .pipe(map((res) => res.data));
   }
 }
